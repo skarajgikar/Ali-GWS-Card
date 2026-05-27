@@ -284,7 +284,7 @@ body::before{
             <option value="Yaman Manaseth" data-role="Software Engineer">Yaman Manaseth</option>
             <option value="Bahareh Eslami" data-role="Software Engineer">Bahareh Eslami</option>
             <option value="Pardeen Shafi" data-role="Software Engineer">Pardeen Shafi</option>
-            <option value="Dulal Soud" data-role="Software Engineer">Dulal Soud</option>
+            <option value="Qusai Soud" data-role="Software Engineer">Dulal Soud</option>
             <option value="Sean Suanalan" data-role="Software Engineer">Sean Suanalan</option>
             <option value="Vahideh Radmard" data-role="Software Engineer">Vahideh Radmard</option>
             <option value="Harold Miyamura" data-role="Software Engineer">Harold Miyamura</option>
@@ -508,10 +508,10 @@ function _json(data) {
         <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
           Open <code style="background:#f0f4f0;padding:2px 7px;border-radius:5px;font-size:12px;color:#1a3d2b">Get Well Soon - Ali.html</code> in any text editor → find the <code style="background:#f0f4f0;padding:2px 7px;border-radius:5px;font-size:12px;color:#1a3d2b">SCRIPT_URL</code> line near the top of the script section → replace the placeholder:
           <pre style="background:#1a3d2b;color:#95d5b2;padding:14px 18px;border-radius:10px;font-size:12px;overflow-x:auto;line-height:1.7;margin-top:10px">// Before:
-const SCRIPT_URL = 'https://script.google.com/a/macros/nvidia.com/s/AKfycbzpazjdzic9dQhRO5_F-K10lDCZ8VBZtukCjQUQk-jDhPAIHLF1qy2bHV-TIjXDr7Yfew/exec';
+const SCRIPT_URL = 'https://script.google.com/a/macros/nvidia.com/s/AKfycbwLRK1Z3NrSpHGFUYG3dNUamraSe0TR9Ga6_oV11wYwDN6m4IPmeRffMbMnpH6L57zWXQ/exec';
 
 // After:
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec';</pre>
+const SCRIPT_URL = 'https://script.google.com/a/macros/nvidia.com/s/AKfycbwLRK1Z3NrSpHGFUYG3dNUamraSe0TR9Ga6_oV11wYwDN6m4IPmeRffMbMnpH6L57zWXQ/exec';</pre>
           Save the file. Wishes will now be stored in your Google Sheet and visible to everyone who opens the card.
         </div>
       </div>
@@ -539,10 +539,10 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec';</pre>
 //  Follow the "Cloud Setup" guide to get this URL, then replace the placeholder.
 //  It will look like: https://script.google.com/macros/s/AKfycb.../exec
 // ─────────────────────────────────────────────────────────────────────────────
-const SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const SCRIPT_URL = 'https://script.google.com/a/macros/nvidia.com/s/AKfycbwLRK1Z3NrSpHGFUYG3dNUamraSe0TR9Ga6_oV11wYwDN6m4IPmeRffMbMnpH6L57zWXQ/exec';
 // ─────────────────────────────────────────────────────────────────────────────
 
-const GAS_READY    = SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const GAS_READY    = SCRIPT_URL !== 'https://script.google.com/a/macros/nvidia.com/s/AKfycbwLRK1Z3NrSpHGFUYG3dNUamraSe0TR9Ga6_oV11wYwDN6m4IPmeRffMbMnpH6L57zWXQ/exec';
 const STORAGE_KEY  = 'dce_ali_wishes';
 const CARD_ACCENTS = ['#4a7c59','#2d6a4f','#588157','#3a7d44','#1b6b5a','#6b4226','#8b5cf6','#c05621','#1a6b5a','#7c3d3d'];
 const POLL_MS      = 15000; // refresh interval when using Apps Script
