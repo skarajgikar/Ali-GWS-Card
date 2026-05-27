@@ -315,6 +315,10 @@ body::before{
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Print Card
       </button>
+      <button class="btn-print" onclick="toggleSetupGuide()" style="background:none;border:1.5px solid #7a9e7e;color:#4a7c59" title="How to publish to GitHub Pages with Firebase">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+        Cloud Setup
+      </button>
       <div class="toast" id="toast">Wish added! Thank you!</div>
     </div>
   </div>
@@ -347,39 +351,240 @@ body::before{
 
 </div>
 
+<!-- ── Apps Script Not-Configured Banner ─────────────────────────── -->
+<div id="gas-banner" style="display:none;position:fixed;bottom:20px;right:20px;left:20px;background:#fffbeb;border:2px solid #f59e0b;border-radius:14px;padding:16px 20px;z-index:9999;box-shadow:0 6px 28px rgba(0,0,0,0.13);max-width:640px;margin:0 auto">
+  <div style="display:flex;align-items:flex-start;gap:12px">
+    <span style="font-size:22px;flex-shrink:0;line-height:1.3">⚠️</span>
+    <div style="flex:1">
+      <div style="font-weight:700;color:#92400e;font-size:14px;margin-bottom:3px">Not connected — wishes are saved in this browser only</div>
+      <div style="color:#78350f;font-size:13px;line-height:1.5">To share the card across the team, set up a Google Apps Script backend (uses your existing NVIDIA Google account). <a href="#" onclick="toggleSetupGuide(event)" style="color:#b45309;font-weight:700;text-decoration:underline">View step-by-step setup guide ↓</a></div>
+    </div>
+    <button onclick="document.getElementById('gas-banner').style.display='none'" style="background:none;border:none;cursor:pointer;font-size:22px;color:#92400e;flex-shrink:0;line-height:1;padding:0 2px">&times;</button>
+  </div>
+</div>
+
+<!-- ── Setup Guide ──────────────────────────────────────────────── -->
+<div id="setup-guide" style="display:none;max-width:900px;margin:0 auto;padding:0 24px 50px;position:relative;z-index:1">
+  <div style="background:#fff;border:1.5px solid #c8b97a;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
+    <!-- Guide header -->
+    <div style="background:linear-gradient(135deg,#1a3d2b 0%,#2d6a4f 100%);padding:22px 28px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="color:#95d5b2;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:5px">Step-by-step</div>
+        <div style="color:#fff;font-family:'Playfair Display',serif;font-size:21px;font-weight:700">Publishing to GitHub Pages + Google Apps Script</div>
+        <div style="color:#a8d5be;font-size:13px;margin-top:4px">Uses your existing NVIDIA Google account — no new services or billing needed</div>
+      </div>
+      <button onclick="toggleSetupGuide()" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);border-radius:8px;color:#fff;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap">Close ✕</button>
+    </div>
+    <div style="padding:30px 32px">
+
+      <!-- Step 1 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">1</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Create a Google Sheet</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          Go to <a href="https://sheets.new" target="_blank" style="color:#4a7c59;font-weight:600">sheets.new</a> in your NVIDIA Google account to create a new spreadsheet. Name it something like <strong>Ali Get Well Wishes</strong>. This sheet will be the database that stores all team messages.
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">2</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Open Apps Script</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          In the Google Sheet → click <strong>Extensions</strong> in the top menu → click <strong>Apps Script</strong>. A new tab opens with a code editor. Delete any existing code in the editor.
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">3</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Paste the Script Code</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          Copy the entire block below and paste it into the Apps Script editor, then click the 💾 <strong>Save</strong> icon (or Ctrl+S):
+          <pre style="background:#1a3d2b;color:#95d5b2;padding:16px 18px;border-radius:10px;font-size:11.5px;overflow-x:auto;line-height:1.7;margin-top:10px;white-space:pre">const SHEET_NAME = 'Wishes';
+
+function getSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName(SHEET_NAME);
+  if (!sh) {
+    sh = ss.insertSheet(SHEET_NAME);
+    sh.appendRow(['id','name','role','text','ts']);
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+function doGet(e) {
+  const action = e.parameter.action || 'get';
+  const sh = getSheet();
+
+  if (action === 'get') {
+    const vals = sh.getDataRange().getValues();
+    if (vals.length &lt; 2) return _json([]);
+    const hdrs = vals[0];
+    return _json(vals.slice(1).map(r =&gt;
+      Object.fromEntries(hdrs.map((h, i) =&gt; [h, r[i]]))));
+  }
+
+  if (action === 'delete') {
+    const id = e.parameter.id;
+    const vals = sh.getDataRange().getValues();
+    for (let i = 1; i &lt; vals.length; i++) {
+      if (String(vals[i][0]) === String(id)) {
+        sh.deleteRow(i + 1);
+        return _json({ ok: true });
+      }
+    }
+    return _json({ error: 'not found' });
+  }
+
+  return _json({ error: 'unknown action' });
+}
+
+function doPost(e) {
+  try {
+    const b = JSON.parse(e.postData.contents);
+    const sh = getSheet();
+    const id = Date.now().toString();
+    sh.appendRow([id, b.name || '', b.role || '', b.text || '',
+                  new Date().toISOString()]);
+    return _json({ ok: true, id });
+  } catch (err) {
+    return _json({ error: String(err) });
+  }
+}
+
+function _json(data) {
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">4</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Deploy as a Web App</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          In the Apps Script editor → click the blue <strong>Deploy</strong> button (top right) → <strong>New deployment</strong> → click the gear ⚙️ next to "Select type" and choose <strong>Web app</strong>.<br><br>
+          Fill in the deployment settings exactly as follows:
+          <ul style="margin:10px 0 10px 20px;line-height:2">
+            <li><strong>Description:</strong> Ali Wishes API</li>
+            <li><strong>Execute as:</strong> Me (your NVIDIA account)</li>
+            <li><strong>Who has access:</strong> Anyone</li>
+          </ul>
+          Click <strong>Deploy</strong>. You may be asked to grant permissions — click <strong>Authorize access</strong> and follow the prompts.
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">5</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Copy the Web App URL</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          After deploying, a dialog shows <strong>Web app URL</strong> — it looks like:<br>
+          <code style="background:#f0f4f0;padding:4px 10px;border-radius:5px;font-size:12px;color:#1a3d2b;display:inline-block;margin:6px 0">https://script.google.com/macros/s/AKfycb.../exec</code><br>
+          Copy this URL — you'll paste it into the HTML file next.
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#1a3d2b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">6</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Paste the URL into the HTML File</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          Open <code style="background:#f0f4f0;padding:2px 7px;border-radius:5px;font-size:12px;color:#1a3d2b">Get Well Soon - Ali.html</code> in any text editor → find the <code style="background:#f0f4f0;padding:2px 7px;border-radius:5px;font-size:12px;color:#1a3d2b">SCRIPT_URL</code> line near the top of the script section → replace the placeholder:
+          <pre style="background:#1a3d2b;color:#95d5b2;padding:14px 18px;border-radius:10px;font-size:12px;overflow-x:auto;line-height:1.7;margin-top:10px">// Before:
+const SCRIPT_URL = 'https://script.google.com/a/macros/nvidia.com/s/AKfycbzpazjdzic9dQhRO5_F-K10lDCZ8VBZtukCjQUQk-jDhPAIHLF1qy2bHV-TIjXDr7Yfew/exec';
+
+// After:
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec';</pre>
+          Save the file. Wishes will now be stored in your Google Sheet and visible to everyone who opens the card.
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div style="margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:10px">
+          <div style="width:34px;height:34px;background:#d4a017;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">7</div>
+          <div style="font-weight:700;font-size:16px;color:#1a3d2b">Publish to GitHub Pages (optional)</div>
+        </div>
+        <div style="margin-left:47px;color:#3d2b1a;font-size:14px;line-height:1.75">
+          To share via a link: go to <a href="https://github.com/new" target="_blank" style="color:#4a7c59;font-weight:600">github.com/new</a> → create a <strong>Public</strong> repository → upload this HTML file → go to repository <strong>Settings → Pages</strong> → set source to <strong>main branch / (root)</strong> → Save.<br>
+          Your shareable link will be: <code style="background:#f0f4f0;padding:3px 8px;border-radius:5px;font-size:12px;color:#1a3d2b">https://YOUR-USERNAME.github.io/REPO-NAME/Get Well Soon - Ali.html</code><br><br>
+          <strong style="color:#1a3d2b">All done!</strong> Every teammate who opens the link will see all existing wishes live, and new ones appear automatically every 15 seconds. 🎉
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
-const CARD_ACCENTS=['#4a7c59','#2d6a4f','#588157','#3a7d44','#1b6ca8','#6b4226','#8b5cf6','#c05621','#1a6b5a','#7c3d3d'];
-const STORAGE_KEY='dce_ali_wishes';
+// ─────────────────────────────────────────────────────────────────────────────
+//  GOOGLE APPS SCRIPT WEB APP URL
+//  Follow the "Cloud Setup" guide to get this URL, then replace the placeholder.
+//  It will look like: https://script.google.com/macros/s/AKfycb.../exec
+// ─────────────────────────────────────────────────────────────────────────────
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+// ─────────────────────────────────────────────────────────────────────────────
 
-function initials(name){return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+const GAS_READY    = SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const STORAGE_KEY  = 'dce_ali_wishes';
+const CARD_ACCENTS = ['#4a7c59','#2d6a4f','#588157','#3a7d44','#1b6b5a','#6b4226','#8b5cf6','#c05621','#1a6b5a','#7c3d3d'];
+const POLL_MS      = 15000; // refresh interval when using Apps Script
 
-function loadMessages(){
-  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return[];}
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+function escHTML(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function updateCharCount(){
+  const t=document.getElementById('msg-text').value;
+  document.getElementById('char-count').textContent=`${t.length} / 400 characters`;
+}
+function showToast(){
+  const toast=document.getElementById('toast');
+  toast.style.display='block';
+  setTimeout(()=>toast.style.display='none',2800);
+}
+function toggleSetupGuide(e){
+  if(e)e.preventDefault();
+  const g=document.getElementById('setup-guide');
+  const visible=g.style.display!=='none';
+  g.style.display=visible?'none':'block';
+  if(!visible)setTimeout(()=>g.scrollIntoView({behavior:'smooth',block:'start'}),50);
 }
 
-function saveMessages(msgs){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(msgs));
-}
-
-function renderMessages(){
-  const msgs=loadMessages();
-  const grid=document.getElementById('messages-grid');
+// ── Render message cards ──────────────────────────────────────────────────────
+function renderMessages(msgs){
+  const grid =document.getElementById('messages-grid');
   const empty=document.getElementById('empty-state');
   const count=document.getElementById('msg-count');
   count.textContent=msgs.length+(msgs.length===1?' wish':' wishes');
   if(!msgs.length){
-    grid.innerHTML='';
-    grid.appendChild(empty);
-    empty.style.display='block';
-    return;
+    grid.innerHTML='';grid.appendChild(empty);empty.style.display='block';return;
   }
   empty.style.display='none';
   grid.innerHTML=msgs.map((m,i)=>{
     const accent=CARD_ACCENTS[i%CARD_ACCENTS.length];
     const ini=initials(m.name||'?');
-    const timeStr=m.ts?new Date(m.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    const ts=m.ts?new Date(m.ts):null;
+    const timeStr=ts&&!isNaN(ts)?ts.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    const delAttr=GAS_READY&&m.id?`data-id="${escHTML(String(m.id))}"`:`data-idx="${i}"`;
     return `<div class="msg-card" style="--accent:${accent}">
-      <button class="msg-card-delete" onclick="deleteMessage(${i})" title="Remove">&times;</button>
+      <button class="msg-card-delete" onclick="deleteMessage(this)" ${delAttr} title="Remove">&times;</button>
       <div class="msg-card-quote">&ldquo;</div>
       <div class="msg-card-text">${escHTML(m.text)}</div>
       <div class="msg-card-footer">
@@ -394,57 +599,116 @@ function renderMessages(){
   }).join('');
 }
 
-function addMessage(){
-  const nameEl=document.getElementById('msg-name');
-  const roleEl=document.getElementById('msg-role');
-  const textEl=document.getElementById('msg-text');
-  const name=nameEl.value.trim();
-  const role=roleEl.value.trim()||nameEl.options[nameEl.selectedIndex]?.dataset?.role||'';
-  const text=textEl.value.trim();
-  if(!name){nameEl.focus();nameEl.style.borderColor='#e05050';setTimeout(()=>nameEl.style.borderColor='',1500);return;}
-  if(!text){textEl.focus();textEl.style.borderColor='#e05050';setTimeout(()=>textEl.style.borderColor='',1500);return;}
-  const msgs=loadMessages();
-  msgs.push({name,role,text,ts:Date.now()});
-  saveMessages(msgs);
-  nameEl.value='';textEl.value='';roleEl.value='';
-  updateCharCount();
-  renderMessages();
-  const toast=document.getElementById('toast');
-  toast.style.display='block';
-  setTimeout(()=>toast.style.display='none',2800);
+// ═════════════════════════════════════════════════════════════════════════════
+//  APPS SCRIPT PATH  (when SCRIPT_URL is configured)
+// ═════════════════════════════════════════════════════════════════════════════
+if(GAS_READY){
+  let _pollTimer=null;
+
+  // Fetch all wishes from the Google Sheet via Apps Script
+  async function _fetchWishes(){
+    try{
+      const r=await fetch(SCRIPT_URL+'?action=get',{cache:'no-store'});
+      const msgs=await r.json();
+      if(Array.isArray(msgs))renderMessages(msgs);
+    }catch(err){
+      console.warn('Could not reach Apps Script:',err);
+    }
+  }
+
+  // Initial load + start polling
+  _fetchWishes();
+  _pollTimer=setInterval(_fetchWishes,POLL_MS);
+
+  // Add wish → POST to Apps Script (text/plain avoids CORS preflight)
+  window.addMessage=async function(){
+    const nameEl=document.getElementById('msg-name');
+    const roleEl=document.getElementById('msg-role');
+    const textEl=document.getElementById('msg-text');
+    const name=nameEl.value.trim();
+    const role=roleEl.value.trim()||nameEl.options[nameEl.selectedIndex]?.dataset?.role||'';
+    const text=textEl.value.trim();
+    if(!name){nameEl.focus();nameEl.style.borderColor='#e05050';setTimeout(()=>nameEl.style.borderColor='',1500);return;}
+    if(!text){textEl.focus();textEl.style.borderColor='#e05050';setTimeout(()=>textEl.style.borderColor='',1500);return;}
+    try{
+      const r=await fetch(SCRIPT_URL,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain'}, // avoids CORS preflight
+        body:JSON.stringify({name,role,text})
+      });
+      const res=await r.json();
+      if(res.ok){
+        nameEl.value='';textEl.value='';
+        updateCharCount();
+        showToast();
+        await _fetchWishes(); // refresh immediately
+      }else{
+        alert('Could not save wish: '+(res.error||'unknown error'));
+      }
+    }catch(err){
+      alert('Network error — please try again.\n\n'+err.message);
+    }
+  };
+
+  // Delete wish → GET with action=delete&id=...
+  window.deleteMessage=async function(btn){
+    if(!confirm('Remove this wish?'))return;
+    const id=btn.dataset.id;
+    if(!id)return;
+    try{
+      await fetch(SCRIPT_URL+'?action=delete&id='+encodeURIComponent(id),{cache:'no-store'});
+      await _fetchWishes();
+    }catch(err){
+      alert('Could not delete wish.\n\n'+err.message);
+    }
+  };
+
+}else{
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  LOCAL STORAGE PATH  (SCRIPT_URL not configured yet — shows banner)
+  // ═══════════════════════════════════════════════════════════════════════════
+  document.getElementById('gas-banner').style.display='block';
+  _initLocalStorage();
 }
 
-function deleteMessage(idx){
-  if(!confirm('Remove this wish?'))return;
-  const msgs=loadMessages();
-  msgs.splice(idx,1);
-  saveMessages(msgs);
-  renderMessages();
+// ── localStorage fallback ─────────────────────────────────────────────────────
+function _initLocalStorage(){
+  function _load(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return[];}}
+  function _save(msgs){localStorage.setItem(STORAGE_KEY,JSON.stringify(msgs));}
+  renderMessages(_load());
+
+  window.addMessage=function(){
+    const nameEl=document.getElementById('msg-name');
+    const roleEl=document.getElementById('msg-role');
+    const textEl=document.getElementById('msg-text');
+    const name=nameEl.value.trim();
+    const role=roleEl.value.trim()||nameEl.options[nameEl.selectedIndex]?.dataset?.role||'';
+    const text=textEl.value.trim();
+    if(!name){nameEl.focus();nameEl.style.borderColor='#e05050';setTimeout(()=>nameEl.style.borderColor='',1500);return;}
+    if(!text){textEl.focus();textEl.style.borderColor='#e05050';setTimeout(()=>textEl.style.borderColor='',1500);return;}
+    const msgs=_load();
+    msgs.push({name,role,text,ts:Date.now()});
+    _save(msgs);nameEl.value='';textEl.value='';
+    updateCharCount();renderMessages(_load());showToast();
+  };
+
+  window.deleteMessage=function(btn){
+    if(!confirm('Remove this wish?'))return;
+    const idx=parseInt(btn.dataset.idx);
+    const msgs=_load();msgs.splice(idx,1);
+    _save(msgs);renderMessages(_load());
+  };
 }
 
-function escHTML(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function updateCharCount(){
-  const t=document.getElementById('msg-text').value;
-  document.getElementById('char-count').textContent=`${t.length} / 400 characters`;
-}
-
+// ── Shared UI event listeners ─────────────────────────────────────────────────
 document.getElementById('msg-text').addEventListener('input',updateCharCount);
-
-// Allow selecting name from dropdown or typing custom
 document.getElementById('msg-name').addEventListener('change',function(){
   const role=this.options[this.selectedIndex]?.dataset?.role||'';
   if(role)document.getElementById('msg-role').value=role;
 });
-
-// Add on Enter in textarea with Ctrl/Cmd
 document.getElementById('msg-text').addEventListener('keydown',function(e){
   if((e.ctrlKey||e.metaKey)&&e.key==='Enter')addMessage();
 });
-
-renderMessages();
 </script>
 </body>
 </html>
