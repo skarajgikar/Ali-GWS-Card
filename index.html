@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Well Soon, Ali!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{
+  background:#fdf6ee;
+  color:#2c1a0e;
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── Background pattern ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(149,213,178,0.18) 0%, transparent 50%),
+    radial-gradient(circle at 85% 10%, rgba(255,213,128,0.15) 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(210,180,140,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 20% 85%, rgba(149,213,178,0.12) 0%, transparent 40%);
+}
+
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:30px 24px 60px}
+
+/* ── Hero Header ── */
+.hero{
+  text-align:center;
+  padding:50px 24px 40px;
+  position:relative;
+}
+.hero-deco-top{display:flex;justify-content:center;gap:0;margin-bottom:20px}
+.hero-from{
+  font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:#7a9e7e;margin-bottom:16px
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(42px,7vw,72px);font-weight:700;
+  line-height:1.1;color:#1a3d2b;
+  letter-spacing:-1px;
+}
+.hero-title em{color:#4a7c59;font-style:italic}
+.hero-name{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(52px,8vw,84px);
+  font-weight:700;color:#2d6a4f;
+  line-height:1.1;display:block;margin-top:4px
+}
+.hero-sub{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:18px;color:#6b8f71;
+  margin-top:18px;line-height:1.6
+}
+.hero-divider{
+  display:flex;align-items:center;gap:16px;
+  margin:30px auto;max-width:420px
+}
+.hero-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,#b5d5bc,transparent)}
+.hero-divider-icon{color:#4a7c59;flex-shrink:0}
+
+/* ── Add message form ── */
+.form-section{
+  background:white;
+  border-radius:20px;
+  border:1.5px solid #d4e8d8;
+  padding:32px 36px;
+  margin:0 0 36px;
+  box-shadow:0 4px 40px rgba(74,124,89,0.08);
+}
+.form-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:600;color:#1a3d2b;
+  margin-bottom:6px
+}
+.form-sub{font-size:13px;color:#7a9e7e;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+.field label{display:block;font-size:12px;font-weight:600;color:#4a7c59;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;background:#fafdf9;
+  border:1.5px solid #c8e0cc;border-radius:10px;
+  color:#2c1a0e;font-family:'Inter',sans-serif;font-size:14px;
+  padding:11px 14px;outline:none;transition:border-color 0.18s,box-shadow 0.18s;
+  -webkit-appearance:none;appearance:none
+}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a7c59' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px;padding-right:36px;background-color:#fafdf9}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#4a7c59;box-shadow:0 0 0 3px rgba(74,124,89,0.12)}
+.field textarea{resize:vertical;min-height:110px;line-height:1.6}
+.form-actions{display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap}
+.btn-primary{
+  background:#2d6a4f;color:white;
+  border:none;border-radius:12px;
+  padding:13px 28px;font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:600;cursor:pointer;
+  transition:all 0.18s;letter-spacing:0.02em;display:flex;align-items:center;gap:8px
+}
+.btn-primary:hover{background:#1b4332;box-shadow:0 4px 20px rgba(27,67,50,0.3);transform:translateY(-1px)}
+.btn-print{
+  background:transparent;color:#4a7c59;
+  border:1.5px solid #c8e0cc;border-radius:12px;
+  padding:12px 22px;font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;transition:all 0.18s
+}
+.btn-print:hover{background:#f0f9f2;border-color:#4a7c59}
+.form-hint{font-size:11px;color:#a0b8a4;margin-top:8px}
+.toast{display:none;font-size:12px;color:#2d6a4f;font-weight:600;padding:8px 14px;background:#e8f5e9;border-radius:8px;border:1px solid #a5d6a7}
+
+/* ── Messages grid ── */
+.messages-section{margin-top:0}
+.messages-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:22px;flex-wrap:wrap;gap:12px
+}
+.messages-title{
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-weight:600;color:#1a3d2b
+}
+.messages-count{
+  font-size:12px;color:#7a9e7e;font-weight:600;
+  background:#e8f5e9;padding:4px 12px;border-radius:20px
+}
+.messages-empty{
+  text-align:center;padding:48px 24px;
+  color:#7a9e7e;font-style:italic;font-family:'Playfair Display',serif;font-size:18px
+}
+.messages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(256px,1fr));gap:18px}
+
+/* ── Message card ── */
+.msg-card{
+  background:white;border-radius:16px;
+  border:1.5px solid #d4e8d8;
+  padding:24px 22px 20px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+}
+.msg-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--accent,#4a7c59);
+}
+.msg-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(74,124,89,0.12)}
+.msg-card-quote{
+  font-size:32px;line-height:1;color:var(--accent,#4a7c59);
+  opacity:0.25;font-family:'Playfair Display',serif;
+  margin-bottom:10px;
+}
+.msg-card-text{
+  font-size:14px;line-height:1.7;color:#2c1a0e;
+  font-family:'Playfair Display',serif;font-style:italic;
+  margin-bottom:18px;min-height:56px;word-break:break-word
+}
+.msg-card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:14px;border-top:1px solid #e8f0e8
+}
+.msg-card-name{
+  font-size:13px;font-weight:600;color:#1a3d2b;
+  font-family:'Inter',sans-serif
+}
+.msg-card-role{font-size:11px;color:#7a9e7e;margin-top:1px}
+.msg-card-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--accent,#4a7c59);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:11px;font-weight:700;
+  font-family:'Inter',sans-serif;flex-shrink:0
+}
+.msg-card-delete{
+  position:absolute;top:12px;right:12px;
+  background:transparent;border:none;cursor:pointer;
+  color:#c8d8cc;font-size:16px;line-height:1;
+  transition:color 0.15s;padding:2px 5px
+}
+.msg-card-delete:hover{color:#e05050}
+.msg-card-time{font-size:10px;color:#b0c4b4;font-family:'Inter',sans-serif;margin-top:2px}
+
+/* ── Footer ── */
+.card-footer{
+  text-align:center;margin-top:48px;
+  padding-top:30px;border-top:1px solid #d4e8d8
+}
+.card-footer-logo{
+  font-family:'Playfair Display',serif;font-size:14px;
+  color:#7a9e7e;font-style:italic
+}
+.card-footer-team{
+  font-family:'Dancing Script',cursive;
+  font-size:28px;font-weight:600;color:#2d6a4f;
+  margin-top:4px
+}
+
+/* ── Print styles ── */
+@media print{
+  body{background:white}
+  body::before{display:none}
+  .form-section{display:none}
+  .btn-print,.msg-card-delete{display:none}
+  .msg-card{break-inside:avoid;box-shadow:none}
+  .hero-title{font-size:48px}
+  .hero-name{font-size:60px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="hero-from">Data Center Engineering · Thermal Team</div>
+
+    <!-- SVG botanical decoration -->
+    <svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px;opacity:0.7">
+      <!-- Left branch -->
+      <path d="M10 60 Q40 30 80 20" stroke="#4a7c59" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M30 48 Q42 34 50 22" stroke="#4a7c59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="48" cy="22" rx="10" ry="6" fill="#95d5b2" opacity="0.6" transform="rotate(-30 48 22)"/>
+      <ellipse cx="68" cy="18" rx="12" ry="6" fill="#4a7c59" opacity="0.4" transform="rotate(-20 68 18)"/>
+      <ellipse cx="78" cy="28" rx="9" ry="5" fill="#95d5b2" opacity="0.5" transform="rotate(10 78 28)"/>
+      <!-- Small flower left -->
+      <circle cx="20" cy="58" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="14" cy="52" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="26" cy="52" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="20" cy="63" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="14" cy="63" r="3" fill="#ffd980" opacity="0.6"/>
+      <circle cx="26" cy="63" r="3" fill="#ffd980" opacity="0.6"/>
+      <!-- Center sprout -->
+      <path d="M155 70 Q158 50 160 30" stroke="#4a7c59" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="156" cy="46" rx="10" ry="5" fill="#95d5b2" opacity="0.55" transform="rotate(-20 156 46)"/>
+      <ellipse cx="164" cy="38" rx="10" ry="5" fill="#4a7c59" opacity="0.35" transform="rotate(15 164 38)"/>
+      <circle cx="160" cy="28" r="5" fill="#d4a017" opacity="0.65"/>
+      <!-- Right branch -->
+      <path d="M310 60 Q280 30 240 20" stroke="#4a7c59" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M290 48 Q278 34 270 22" stroke="#4a7c59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="272" cy="22" rx="10" ry="6" fill="#95d5b2" opacity="0.6" transform="rotate(30 272 22)"/>
+      <ellipse cx="252" cy="18" rx="12" ry="6" fill="#4a7c59" opacity="0.4" transform="rotate(20 252 18)"/>
+      <ellipse cx="242" cy="28" rx="9" ry="5" fill="#95d5b2" opacity="0.5" transform="rotate(-10 242 28)"/>
+      <!-- Small flower right -->
+      <circle cx="300" cy="58" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="294" cy="52" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="306" cy="52" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="300" cy="63" r="3" fill="#ffd980" opacity="0.7"/>
+      <circle cx="294" cy="63" r="3" fill="#ffd980" opacity="0.6"/>
+      <circle cx="306" cy="63" r="3" fill="#ffd980" opacity="0.6"/>
+    </svg>
+
+    <h1 class="hero-title">Get Well Soon,<span class="hero-name">Ali!</span></h1>
+    <p class="hero-sub">Wishing you a speedy recovery and brighter days ahead.<br>We miss you and can't wait to have you back!</p>
+
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <svg class="hero-divider-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="1.8">
+        <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
+      </svg>
+      <div class="hero-divider-line"></div>
+    </div>
+  </div>
+
+  <!-- ── Add a wish form ── -->
+  <div class="form-section">
+    <div class="form-title">Leave your wishes for Ali</div>
+    <div class="form-sub">Select your name and share a personal message</div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>Your Name</label>
+        <select id="msg-name">
+          <option value="">— Select your name —</option>
+          <optgroup label="Team">
+            <option value="Saket Karajgikar" data-role="Sr. Engineering Manager">Saket Karajgikar</option>
+            <option value="Mohammad Tradat" data-role="Engineering Manager">Mohammad Tradat</option>
+            <option value="Doug Asav" data-role="Software Engineer">Doug Asav</option>
+            <option value="Greg Busch" data-role="Software Engineer">Greg Busch</option>
+            <option value="Kourosh Nemati" data-role="Software Engineer">Kourosh Nemati</option>
+            <option value="Peter YT Chen" data-role="Software Engineer">Peter YT Chen</option>
+            <option value="Sergio Escobar" data-role="Software Engineer">Sergio Escobar</option>
+            <option value="Tanya Mutter" data-role="Software Engineer">Tanya Mutter</option>
+            <option value="Yaman Manaseth" data-role="Software Engineer">Yaman Manaseth</option>
+            <option value="Bahareh Eslami" data-role="Software Engineer">Bahareh Eslami</option>
+            <option value="Pardeen Shafi" data-role="Software Engineer">Pardeen Shafi</option>
+            <option value="Dulal Soud" data-role="Software Engineer">Dulal Soud</option>
+            <option value="Sean Suanalan" data-role="Software Engineer">Sean Suanalan</option>
+            <option value="Vahideh Radmard" data-role="Software Engineer">Vahideh Radmard</option>
+            <option value="Harold Miyamura" data-role="Software Engineer">Harold Miyamura</option>
+            <option value="Himanshu Modi" data-role="Software Engineer">Himanshu Modi</option>
+            <option value="Raha Kalantaropur" data-role="Software Engineer">Raha Kalantaropur</option>
+            <option value="Utshas Chowdhury" data-role="Software Engineer">Utshas Chowdhury</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field">
+        <label>Your Role / Team <span style="font-weight:400;opacity:0.7">(optional)</span></label>
+        <input type="text" id="msg-role" placeholder="e.g. Platform SW Team" maxlength="60">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your Message</label>
+      <textarea id="msg-text" placeholder="Write your heartfelt get-well wishes here..." maxlength="400"></textarea>
+    </div>
+    <div class="form-hint" id="char-count">0 / 400 characters</div>
+
+    <div class="form-actions">
+      <button class="btn-primary" onclick="addMessage()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Add My Wish
+      </button>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Card
+      </button>
+      <div class="toast" id="toast">Wish added! Thank you!</div>
+    </div>
+  </div>
+
+  <!-- ── Messages ── -->
+  <div class="messages-section">
+    <div class="messages-header">
+      <div class="messages-title">Wishes from the Team</div>
+      <div class="messages-count" id="msg-count">0 wishes</div>
+    </div>
+    <div id="messages-grid" class="messages-grid">
+      <div class="messages-empty" id="empty-state">Be the first to leave a wish for Ali!</div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="card-footer">
+    <div class="card-footer-logo">With love and warm wishes from</div>
+    <div class="card-footer-team">The DCE Thermal Team at NVIDIA</div>
+
+    <svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:12px;opacity:0.5">
+      <path d="M10 30 Q50 5 100 20 Q150 35 190 10" stroke="#4a7c59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="35" cy="17" rx="8" ry="4" fill="#95d5b2" opacity="0.7" transform="rotate(-20 35 17)"/>
+      <ellipse cx="100" cy="18" rx="8" ry="4" fill="#4a7c59" opacity="0.5" transform="rotate(5 100 18)"/>
+      <ellipse cx="165" cy="18" rx="8" ry="4" fill="#95d5b2" opacity="0.7" transform="rotate(20 165 18)"/>
+      <circle cx="60" cy="14" r="3" fill="#d4a017" opacity="0.6"/>
+      <circle cx="140" cy="22" r="3" fill="#d4a017" opacity="0.6"/>
+    </svg>
+  </div>
+
+</div>
+
+<script>
+const CARD_ACCENTS=['#4a7c59','#2d6a4f','#588157','#3a7d44','#1b6ca8','#6b4226','#8b5cf6','#c05621','#1a6b5a','#7c3d3d'];
+const STORAGE_KEY='dce_ali_wishes';
+
+function initials(name){return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+
+function loadMessages(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return[];}
+}
+
+function saveMessages(msgs){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(msgs));
+}
+
+function renderMessages(){
+  const msgs=loadMessages();
+  const grid=document.getElementById('messages-grid');
+  const empty=document.getElementById('empty-state');
+  const count=document.getElementById('msg-count');
+  count.textContent=msgs.length+(msgs.length===1?' wish':' wishes');
+  if(!msgs.length){
+    grid.innerHTML='';
+    grid.appendChild(empty);
+    empty.style.display='block';
+    return;
+  }
+  empty.style.display='none';
+  grid.innerHTML=msgs.map((m,i)=>{
+    const accent=CARD_ACCENTS[i%CARD_ACCENTS.length];
+    const ini=initials(m.name||'?');
+    const timeStr=m.ts?new Date(m.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    return `<div class="msg-card" style="--accent:${accent}">
+      <button class="msg-card-delete" onclick="deleteMessage(${i})" title="Remove">&times;</button>
+      <div class="msg-card-quote">&ldquo;</div>
+      <div class="msg-card-text">${escHTML(m.text)}</div>
+      <div class="msg-card-footer">
+        <div>
+          <div class="msg-card-name">${escHTML(m.name)}</div>
+          ${m.role?`<div class="msg-card-role">${escHTML(m.role)}</div>`:''}
+          <div class="msg-card-time">${timeStr}</div>
+        </div>
+        <div class="msg-card-avatar" style="background:${accent}">${ini}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function addMessage(){
+  const nameEl=document.getElementById('msg-name');
+  const roleEl=document.getElementById('msg-role');
+  const textEl=document.getElementById('msg-text');
+  const name=nameEl.value.trim();
+  const role=roleEl.value.trim()||nameEl.options[nameEl.selectedIndex]?.dataset?.role||'';
+  const text=textEl.value.trim();
+  if(!name){nameEl.focus();nameEl.style.borderColor='#e05050';setTimeout(()=>nameEl.style.borderColor='',1500);return;}
+  if(!text){textEl.focus();textEl.style.borderColor='#e05050';setTimeout(()=>textEl.style.borderColor='',1500);return;}
+  const msgs=loadMessages();
+  msgs.push({name,role,text,ts:Date.now()});
+  saveMessages(msgs);
+  nameEl.value='';textEl.value='';roleEl.value='';
+  updateCharCount();
+  renderMessages();
+  const toast=document.getElementById('toast');
+  toast.style.display='block';
+  setTimeout(()=>toast.style.display='none',2800);
+}
+
+function deleteMessage(idx){
+  if(!confirm('Remove this wish?'))return;
+  const msgs=loadMessages();
+  msgs.splice(idx,1);
+  saveMessages(msgs);
+  renderMessages();
+}
+
+function escHTML(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function updateCharCount(){
+  const t=document.getElementById('msg-text').value;
+  document.getElementById('char-count').textContent=`${t.length} / 400 characters`;
+}
+
+document.getElementById('msg-text').addEventListener('input',updateCharCount);
+
+// Allow selecting name from dropdown or typing custom
+document.getElementById('msg-name').addEventListener('change',function(){
+  const role=this.options[this.selectedIndex]?.dataset?.role||'';
+  if(role)document.getElementById('msg-role').value=role;
+});
+
+// Add on Enter in textarea with Ctrl/Cmd
+document.getElementById('msg-text').addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter')addMessage();
+});
+
+renderMessages();
+</script>
+</body>
+</html>
